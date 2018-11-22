@@ -1,0 +1,42 @@
+version: '2'
+
+services:
+  ctf_game_db:
+    image: mysql:5.7
+    volumes:
+      - "/opt/ctf.game/fhq-jury-ad/mysql:/var/lib/mysql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: KzhyntJxwt
+      MYSQL_DATABASE: fhqjuryad
+      MYSQL_USER: fhqjuryad
+      MYSQL_PASSWORD: uW2r0V5kpK
+    networks:
+      - ctf_game_net
+
+  ctf_game_jury:
+    depends_on:
+      - ctf_game_db
+    image: ctf.game/fhq-jury-ad:0.1.0
+    volumes:
+      - "/opt/ctf.game/fhq-jury-ad/jury.d:/usr/share/fhq-jury-ad/jury.d"
+    ports:
+      - "8080:8080"
+    restart: always
+    links:
+      - "ctf_game_db"
+    environment:
+      JURY_DB_HOST: ctf_game_db
+      JURY_DB_PORT: 3306
+      JURY_DB_NAME: fhqjuryad
+      JURY_DB_USER: fhqjuryad
+      JURY_DB_PASSWORD: uW2r0V5kpK
+    networks:
+      - ctf_game_net
+
+volumes:
+  jury.d:
+
+networks:
+  ctf_game_net:
+    driver: bridge
