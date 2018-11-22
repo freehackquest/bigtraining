@@ -9,7 +9,12 @@ RUN apt-get install -y dnsutils
 
 # services dependencies
 
+# pumba && weeper checker
+RUN apt-get install -y php
+
 RUN apt-get install -y python python-requests python-pip libssl-dev
+
+RUN apt-get install -y python3 python3-requests python3-pip libssl-dev
 
 # Fix for building on debian system (mysqlclient library)
 # RUN ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/mariadb.pc /usr/lib/x86_64-linux-gnu/pkgconfig/mysqlclient.pc

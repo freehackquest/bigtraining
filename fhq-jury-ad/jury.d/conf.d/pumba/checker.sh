@@ -11,4 +11,5 @@ if [ "$CMD" == "check" ]; then
 fi
 
 # compabillities with jury for ructfe
+cd /usr/share/fhq-jury-ad/jury.d/conf.d/pumba
 php ./pumba_checker.php $CMD $IP $FLAGID $FLAG
